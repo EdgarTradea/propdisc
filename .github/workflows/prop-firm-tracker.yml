@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -39,7 +39,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add state.json
+          git add state.json || echo "No state.json created yet"
           # Commit will fail if nothing changed, which is fine, we ignore error
           git commit -m "chore: update state.json with new tweet IDs [skip ci]" || echo "No changes to commit"
-          git push
+          git push || echo "Nothing to push"
